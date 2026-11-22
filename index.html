@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
+<title>DRAKULA SENSI</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+ --red:#ff123d; --dark:#090909; --card:#141414;
+ --muted:#929292; --white:#fff;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;background:var(--dark);color:white;
+ font-family:Inter,sans-serif;
+ background-image:radial-gradient(ellipse at top,#400914 0%,#090909 48%);
+ min-height:100vh;
+}
+header{
+ padding:22px 6%;display:flex;align-items:center;
+ justify-content:space-between;border-bottom:1px solid #ffffff13;
+ position:sticky;top:0;background:#090909eF;z-index:5;
+ backdrop-filter:blur(15px);
+}
+.logo{font-family:Orbitron;font-size:20px;font-weight:900;color:white}
+.logo span{color:var(--red)}
+.tag{color:#ff5872;font-size:10px;letter-spacing:3px}
+.container{width:min(950px,92%);margin:35px auto 80px}
+.hero{text-align:center;padding:40px 10px}
+.hero h1{
+ font:900 clamp(35px,8vw,65px) Orbitron;
+ margin:0;text-shadow:0 0 30px #ff123d55;
+}
+.hero h1 span{color:var(--red)}
+.hero p{color:#aaa;font-size:14px;line-height:1.7}
+.status{
+ display:inline-block;padding:8px 15px;border:1px solid #ff123d66;
+ border-radius:30px;color:#ff7188;font-size:10px;letter-spacing:2px;
+ margin-bottom:20px;background:#ff123d10;
+}
+.card{
+ background:linear-gradient(145deg,#191919,#101010);
+ border:1px solid #ffffff12;border-radius:18px;
+ padding:24px;margin-bottom:20px;
+ box-shadow:0 12px 45px #0005;
+}
+.card h2{font:700 17px Orbitron;margin:0 0 22px}
+.card h2 span{color:var(--red)}
+label{display:block;font-size:12px;color:#bbb;margin:15px 0 8px}
+input,select{
+ width:100%;padding:14px;background:#090909;color:white;
+ border:1px solid #333;border-radius:10px;outline:none;
+ font-size:14px;
+}
+input:focus,select:focus{border-color:var(--red)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+button{
+ border:0;cursor:pointer;border-radius:10px;padding:14px;
+ font-weight:800;font-size:13px;transition:.2s;
+}
+button:hover{transform:translateY(-2px);filter:brightness(1.15)}
+.primary{
+ background:linear-gradient(100deg,#ff123d,#a50027);
+ color:white;width:100%;box-shadow:0 5px 25px #ff123d35;
+}
+.secondary{background:#242424;color:white;border:1px solid #444}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.plan{
+ background:#0c0c0c;border:1px solid #333;border-radius:13px;
+ padding:17px 12px;text-align:center;cursor:pointer;
+ transition:.2s;position:relative;
+}
+.plan.active{border:1px solid var(--red);background:#290912}
+.plan h3{font:700 14px Orbitron}
+.price{font-size:25px;font-weight:900;color:#ff3658}
+.plan p{font-size:11px;color:#aaa;line-height:1.5}
+.plan input{width:auto;accent-color:var(--red)}
+.popular{font-size:9px;color:#ff7188}
+.result{
+ display:none;border:1px solid #ff123d66;
+ background:linear-gradient(145deg,#260912,#111);
+ border-radius:16px;padding:22px;margin-top:20px;
+}
+.result h2{text-align:center;font-family:Orbitron;color:#ff4766}
+.values{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.value{
+ background:#0c0c0c;border:1px solid #ffffff14;
+ border-radius:10px;padding:15px;text-align:center;
+}
+.value small{color:#999;font-size:10px}
+.value strong{display:block;color:#ff3658;font:800 25px Orbitron;margin-top:8px}
+.payment{display:none}
+.pix{
+ padding:15px;background:#090909;border:1px dashed #ff3658;
+ border-radius:10px;word-break:break-all;font-size:13px;
+ color:#ff879b;
+}
+.notice{font-size:11px;color:#888;line-height:1.6}
+.hidden{display:none}
+footer{text-align:center;color:#555;font-size:11px;padding:30px}
+hr{border:0;border-top:1px solid #ffffff13;margin:22px 0}
+@media(max-width:600px){
+ .grid{grid-template-columns:1fr}
+ .plans{gap:7px}
+ .plan{padding:13px 5px}
+ .plan h3{font-size:11px}
+ .price{font-size:20px}
+ .card{padding:17px}
+}
+</style>
+</head>
+<body>
+<header>
+ <div>
+  <div class="logo">DRAKULA <span>SENSI</span></div>
+  <div class="tag">ULTIMATE GAMING SYSTEM</div>
+ </div>
+ <div style="color:#ff4766;font-size:11px">● ONLINE</div>
+</header>
+
+<main class="container">
+<section class="hero">
+ <div class="status">✦ SISTEMA EXCLUSIVO ✦</div>
+ <h1>DRAKULA <span>SENSI</span></h1>
+ <p>Configure seu dispositivo, escolha seu plano e descubra<br>
+ configurações personalizadas para sua jogabilidade.</p>
+</section>
+
+<section class="card" id="config">
+ <h2>01 / <span>CONFIGURAÇÕES DO CELULAR</span></h2>
+ <div class="grid">
+  <div>
+   <label>Marca do celular</label>
+   <select id="brand" onchange="models()">
+    <option value="Samsung">Samsung</option>
+    <option value="Motorola">Motorola</option>
+    <option value="Xiaomi">Xiaomi</option>
+    <option value="Redmi">Redmi</option>
+    <option value="iPhone">Apple iPhone</option>
+    <option value="Realme">Realme</option>
+    <option value="Poco">POCO</option>
+    <option value="Infinix">Infinix</option>
+    <option value="Tecno">Tecno</option>
+    <option value="Outro">Outro</option>
+   </select>
+  </div>
+  <div>
+   <label>Modelo do aparelho</label>
+   <input id="model" placeholder="Ex: Galaxy A15">
+  </div>
+  <div>
+   <label>Memória RAM</label>
+   <select id="ram">
+    <option value="2">2 GB</option><option value="3">3 GB</option>
+    <option value="4" selected>4 GB</option><option value="6">6 GB</option>
+    <option value="8">8 GB</option><option value="12">12 GB</option>
+    <option value="16">16 GB ou mais</option>
+   </select>
+  </div>
+  <div>
+   <label>Taxa de atualização</label>
+   <select id="hz">
+    <option value="60">60 Hz</option><option value="90">90 Hz</option>
+    <option value="120">120 Hz</option><option value="144">144 Hz</option>
+   </select>
+  </div>
+  <div>
+   <label>Resolução da tela</label>
+   <select id="screen">
+    <option value="720">HD / HD+</option>
+    <option value="1080" selected>Full HD / Full HD+</option>
+    <option value="1440">QHD</option>
+   </select>
+  </div>
+  <div>
+   <label>DPI atual</label>
+   <input id="dpi" type="number" min="100" max="1000" value="420">
+  </div>
+ </div>
+ <label>Estilo de jogo</label>
+ <select id="style">
+  <option value="balanced">Equilibrado</option>
+  <option value="rush">Agressivo / Rush</option>
+  <option value="precision">Precisão</option>
+  <option value="fast">Movimentação rápida</option>
+ </select>
+ <label>Botão de disparo: tamanho atual (%)</label>
+ <input id="fire" type="number" min="10" max="100" value="48">
+</section>
+
+<section class="card">
+ <h2>02 / <span>ESCOLHA SEU PLANO</span></h2>
+ <div class="plans">
+  <div class="plan active" onclick="choose('bom',this)">
+   <input type="radio" name="plan" checked>
+   <h3>BOM</h3>
+   <div class="price">R$ 2,99</div>
+   <p>Configuração básica<br>Personalização inicial</p>
+  </div>
+  <div class="plan" onclick="choose('pro',this)">
+   <input type="radio" name="plan">
+   <div class="popular">✦ MAIS ESCOLHIDO</div>
+   <h3>PRO</h3>
+   <div class="price">R$ 4,99</div>
+   <p>Configuração avançada<br>Mais ajustes personalizados</p>
+  </div>
+  <div class="plan" onclick="choose('max',this)">
+   <input type="radio" name="plan">
+   <h3>MAX</h3>
+   <div class="price">R$ 7,99</div>
+   <p>Configuração completa<br>Mais opções de ajuste</p>
+  </div>
+ </div>
+ <p class="notice">Os planos variam na quantidade de ajustes e personalização. Nenhum deles garante resultados ou vantagens dentro do jogo.</p>
+ <button class="primary" style="margin-top:15px" onclick="checkout()">CONTINUAR PARA PAGAMENTO →</button>
+</section>
+
+<section class="card payment" id="payment">
+ <h2>03 / <span>LIBERAR MINHA SENSI</span></h2>
+ <div id="order"></div>
+ <label>Cupom de desconto</label>
+ <div class="grid">
+  <input id="coupon" placeholder="DIGA O CUPOM">
+  <button class="secondary" onclick="applyCoupon()">APLICAR CUPOM</button>
+ </div>
+ <p id="couponMsg" class="notice"></p>
+ <hr>
+ <label>PIX — chave e-mail</label>
+ <div class="pix" id="pix">betaniaferreiradacruz@gmail.com</div>
+ <button class="secondary" style="width:100%;margin-top:10px" onclick="copyPix()">COPIAR CHAVE PIX</button>
+ <p class="notice">1. Faça o PIX no valor indicado. 2. Envie o comprovante pelo Instagram. 3. Aguarde a confirmação do pagamento.</p>
+ <button class="primary" onclick="instagram()">ENVIAR COMPROVANTE NO INSTAGRAM ↗</button>
+ <hr>
+ <label>Código de liberação</label>
+ <input id="unlock" type="password" placeholder="Digite seu código de liberação">
+ <button class="primary" style="margin-top:12px" onclick="release()">VALIDAR E GERAR SENSI</button>
+ <p id="unlockMsg" class="notice"></p>
+</section>
+
+<section class="result" id="result">
+ <h2>✦ DRAKULA SENSI ✦</h2>
+ <p style="text-align:center;color:#aaa;font-size:12px" id="deviceResult"></p>
+ <div class="values" id="values"></div>
+ <p class="notice" style="margin-top:15px">Configurações sugeridas automaticamente. Os valores são estimativas e devem ser testados e ajustados conforme o aparelho e a versão do jogo.</p>
+ <button class="primary" onclick="copyResult()">COPIAR CONFIGURAÇÕES</button>
+ <button class="secondary" style="width:100%;margin-top:10px" onclick="window.print()">SALVAR / IMPRIMIR</button>
+</section>
+</main>
+<footer>DRAKULA SENSI © 2026 · SISTEMA DE CONFIGURAÇÃO GAMER</footer>
+
+<script>
+const PIX = "betaniaferreiradacruz@gmail.com";
+const INSTAGRAM = "https://www.instagram.com/drakulaaff/";
+
+// Demonstração: validação no navegador NÃO é segurança de pagamento.
+const RELEASE_CODE = "723jgwhfg08rhrc9r8hf87r7hr877fhg8v7rt8t84t836231719731937129837283713784555555555555555555555555555555555gdsfd9sad8sadsa8dsa8d9da8888888888IUGDIUSGISOGDIDHG873876374163126";
+
+let selected = "bom";
+let prices = {bom:2.99,pro:4.99,max:7.99};
+let discount = false;
+let total = prices.bom;
+
+function models(){
+ document.getElementById('model').value='';
+}
+function choose(plan,el){
+ selected=plan;
+ document.querySelectorAll('.plan').forEach(p=>p.classList.remove('active'));
+ el.classList.add('active');
+ document.querySelectorAll('input[name="plan"]').forEach((r,i)=>{
+  r.checked=['bom','pro','max'][i]===plan;
+ });
+}
+function checkout(){
+ const model=document.getElementById('model').value.trim();
+ if(!model){alert('Digite o modelo do seu celular!');return}
+ const dpi=Number(document.getElementById('dpi').value);
+ if(dpi<100||dpi>1000){alert('Informe um DPI entre 100 e 1000.');return}
+ total=prices[selected]-(discount?1:0);
+ total=Math.max(0,total);
+ document.getElementById('order').innerHTML=
+ `<p>Plano: <b>${selected.toUpperCase()}</b></p>
+ <p>Dispositivo: <b>${model}</b></p>
+ <p>Valor: <b style="color:#ff4766">R$ ${total.toFixed(2).replace('.',',')}</b></p>`;
+ document.getElementById('payment').style.display='block';
+ document.getElementById('payment').scrollIntoView({behavior:'smooth'});
+}
+function applyCoupon(){
+ const c=document.getElementById('coupon').value.trim().toUpperCase();
+ const msg=document.getElementById('couponMsg');
+ if(c==='DRAKULAAA100'){
+  discount=true;
+  msg.textContent='Cupom aplicado! R$ 1,00 de desconto.';
+ }else{
+  discount=false;
+  msg.textContent='Cupom inválido.';
+ }
+ checkout();
+}
+function copyPix(){
+ navigator.clipboard.writeText(PIX).then(()=>alert('Chave PIX copiada!'))
+ .catch(()=>alert('Chave PIX: '+PIX));
+}
+function instagram(){
+ window.open(INSTAGRAM,'_blank');
+}
+function release(){
+ const code=document.getElementById('unlock').value.trim();
+ const msg=document.getElementById('unlockMsg');
+ if(code!==RELEASE_CODE){
+  msg.textContent='Código inválido. Verifique com o administrador após a confirmação do pagamento.';
+  msg.style.color='#ff4565';return;
+ }
+ msg.textContent='Código aceito! Gerando sua configuração...';
+ msg.style.color='#66e69a';
+ generate();
+}
+function random(min,max){return Math.floor(Math.random()*(max-min+1))+min}
+function generate(){
+ const ram=Number(document.getElementById('ram').value);
+ const hz=Number(document.getElementById('hz').value);
+ const dpi=Number(document.getElementById('dpi').value);
+ const fire=Number(document.getElementById('fire').value);
+ const style=document.getElementById('style').value;
+ const tier={bom:0,pro:3,max:6}[selected];
+ const boost=style==='rush'?7:style==='precision'?-5:style==='fast'?5:0;
+ const base=Math.min(200,Math.max(80,155+Math.round((ram-4)*1.2)+(hz-60)/20+boost));
+ const sens={
+  "Geral":Math.min(200,base+random(-3,3)+tier),
+  "Ponto vermelho":Math.min(200,base-9+random(-3,3)+tier),
+  "Mira 2x":Math.min(200,base-19+random(-3,3)+tier),
+  "Mira 4x":Math.min(200,base-30+random(-3,3)+tier),
+  "Mira AWM":Math.min(200,base-45+random(-3,3)+tier),
+  "Olhadinha":Math.min(200,base+8+random(-3,3)+tier),
+  "DPI sugerido":Math.min(800,Math.max(200,dpi+random(-15,15)+tier*3)),
+  "Botão de tiro":Math.min(70,Math.max(25,fire+random(-3,3)+tier))
+ };
+ document.getElementById('deviceResult').textContent=
+ document.getElementById('brand').value+' '+document.getElementById('model').value+
+ ' · PLANO '+selected.toUpperCase();
+ const box=document.getElementById('values');
+ box.innerHTML='';
+ Object.entries(sens).forEach(([name,val])=>{
+  box.innerHTML+=`<div class="value"><small>${name}</small><strong>${val}</strong></div>`;
+ });
+ document.getElementById('result').style.display='block';
+ document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+function copyResult(){
+ const text=[...document.querySelectorAll('.value')].map(v=>
+ v.innerText.replace('\n',': ')).join('\n');
+ navigator.clipboard.writeText(text).then(()=>alert('Configurações copiadas!'))
+ .catch(()=>alert(text));
+}
+</script>
+</body>
+</html>
